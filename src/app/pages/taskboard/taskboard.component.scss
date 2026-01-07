@@ -1,0 +1,55 @@
+.task-dashboard{
+    margin: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.task-pannel{
+    width: 34rem;
+    height: 45rem;
+    border-radius: 3px;
+}
+
+.backlog {
+    border: 0.1rem solid #69d8fb;
+}
+.inprogress {
+    border: 0.1rem solid #fb8c4b;
+
+}
+.resolved {
+    border: 0.1rem solid #26cd7f;
+
+}
+
+
+.title{
+    position: sticky;
+    padding: 2rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.panel-backlog, .backlog .backlog-board{
+    background: #69d8fb;
+}
+
+.panel-inprogress, .inprogress .backlog-board{
+    background-color: #fb8c4b;
+}
+
+.panel-resolved, .resolved .backlog-board{
+    background-color: #26cd7f;
+}
+
+.backlog-board{
+    margin: 7px 10px 10px 8px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 4px #c3c3c3;
+}
+
+.task-title{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
