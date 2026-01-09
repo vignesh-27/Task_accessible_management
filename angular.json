@@ -68,7 +68,8 @@
               "buildTarget": "task-board:build:production"
             },
             "development": {
-              "buildTarget": "task-board:build:development"
+              "buildTarget": "task-board:build:development",
+              "proxyConfig": "proxy.config.json"
             }
           },
           "defaultConfiguration": "development"
