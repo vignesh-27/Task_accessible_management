@@ -1,5 +1,11 @@
-<div class="task-dashboard">
-  <div class="col-md-3 task-pannel backlog">
+<div>
+  <app-task-form
+    [formType]="formtype"
+    (formUpdate)="formUpdate($event)"
+  ></app-task-form>
+</div>
+<div *ngIf="showForm" class="task-dashboard">
+  <div class="task-pannel backlog">
     <div class="title panel-backlog">Backlog</div>
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 'backlog'" class="backlog-board">
@@ -8,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 task-pannel inprogress">
+  <div class="task-pannel inprogress">
     <div class="title panel-inprogress">In Progress</div>
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 'inprogress'" class="backlog-board">
@@ -17,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 task-pannel resolved">
+  <div class="task-pannel resolved">
     <div class="title panel-resolved">Resolved</div>
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 'resolved'" class="backlog-board">
