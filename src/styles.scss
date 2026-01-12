@@ -1,0 +1,14 @@
+// Update the import directory to point to it‘s location within node_modules
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+
+// Import the Sass files as usual
+@import "bootstrap-icons/font/bootstrap-icons";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #191a1a !important; /* your app background */
+}

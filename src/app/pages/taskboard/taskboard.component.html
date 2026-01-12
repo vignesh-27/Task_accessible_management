@@ -1,15 +1,28 @@
-<div>
+<div *ngIf="showForm">
   <app-task-form
-    [formType]="formtype"
+    [formType]="formType"
+    [formValue]="formValue"
     (formUpdate)="formUpdate($event)"
   ></app-task-form>
 </div>
-<div *ngIf="showForm" class="task-dashboard">
+
+<div *ngIf="!showForm" class="task-dashboard">
   <div class="task-pannel backlog">
-    <div class="title panel-backlog">Backlog</div>
+    <div class="title panel-backlog">
+      <span
+        ><i class="icon-option bi bi-plus-square" (click)="createForm()"></i
+      ></span>
+      Backlog
+    </div>
     <div *ngFor="let task of allTask">
-      <div *ngIf="task.status == 'backlog'" class="backlog-board">
-        <div class="task-title">{{ task.title }}</div>
+      <div *ngIf="task.status == 1" class="backlog-board">
+        <div class="task-title">
+          <i
+            class="icon-option bi bi-pencil-square"
+            (click)="updateForm(task)"
+          ></i>
+          {{ task.title }}
+        </div>
         <div class="task-desc">{{ task.description }}</div>
       </div>
     </div>
@@ -17,8 +30,14 @@
   <div class="task-pannel inprogress">
     <div class="title panel-inprogress">In Progress</div>
     <div *ngFor="let task of allTask">
-      <div *ngIf="task.status == 'inprogress'" class="backlog-board">
-        <div class="task-title">{{ task.title }}</div>
+      <div *ngIf="task.status == 2" class="backlog-board">
+        <div class="task-title">
+          <i
+            class="icon-option bi bi-pencil-square"
+            (click)="updateForm(task)"
+          ></i>
+          {{ task.title }}
+        </div>
         <div class="task-desc">{{ task.description }}</div>
       </div>
     </div>
@@ -26,8 +45,14 @@
   <div class="task-pannel resolved">
     <div class="title panel-resolved">Resolved</div>
     <div *ngFor="let task of allTask">
-      <div *ngIf="task.status == 'resolved'" class="backlog-board">
-        <div class="task-title">{{ task.title }}</div>
+      <div *ngIf="task.status == 3" class="backlog-board">
+        <div class="task-title">
+          <i
+            class="icon-option bi bi-pencil-square"
+            (click)="updateForm(task)"
+          ></i
+          >{{ task.title }}
+        </div>
         <div class="task-desc">{{ task.description }}</div>
       </div>
     </div>

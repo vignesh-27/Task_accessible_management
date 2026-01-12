@@ -31,6 +31,7 @@
     padding: 2rem;
     text-align: center;
     font-size: 2rem;
+    font-weight: 500;
 }
 
 .panel-backlog, .backlog .backlog-board{
@@ -53,9 +54,26 @@
 }
 
 .task-title{
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 400;
 }
+
+.icon-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f8ff;
+  cursor: pointer;
+  margin-right: 5px;
+      font-size: 24px;
+  border-radius: 15%;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.icon-option:active {
+  transform: scale(0.95);
+}
+
 
 @media (min-width: 768px) {
   .task-pannel {

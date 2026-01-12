@@ -1,52 +1,125 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1">
-      <form [formGroup]="TaskForm" (ngSubmit)="onSubmit()">
-        <div>
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              formControlName="title"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea
-              id="description"
-              class="form-control"
-              rows="10"
-              cols="70"
-              formControlName="description"
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="priority">Priority</label>
-            <input
-              type="text"
-              id="priority"
-              class="form-control"
-              formControlName="priority"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="status">Status</label>
-            <input
-              type="text"
-              id="status"
-              class="form-control"
-              formControlName="status"
-            />
-          </div>
-
-          <button class="btn btn-primary" type="submit">Submit</button>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    #exampleModal
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Backlog</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
-      </form>
+
+        <div class="modal-body">
+          <form [formGroup]="TaskForm" (ngSubmit)="onSubmit()">
+            <div>
+              <div class="form-group">
+                <label class="form-label" for="title">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Title"
+                  id="title"
+                  formControlName="title"
+                />
+                <div
+                  class="error-message"
+                  *ngIf="title?.touched && title?.invalid"
+                >
+                  <span *ngIf="title?.errors?.['required']">
+                    Title is required.
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  rows="6"
+                  cols="70"
+                  aria-label="Description"
+                  formControlName="description"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Priority</label
+                >{{ statusOptions | json }}
+                <select
+                  class="form-select"
+                  formControlName="priority"
+                  aria-label="Select Priority"
+                >
+                  <option
+                    *ngFor="let priority of priorityOptions"
+                    [ngValue]="priority.value"
+                  >
+                    {{ priority.name }}
+                  </option>
+                </select>
+                <div
+                  class="error-message"
+                  *ngIf="priority.touched && priority?.invalid"
+                >
+                  <span *ngIf="priority?.errors?.['required']">
+                    Priority is required.
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Status</label>
+                <select
+                  class="form-select"
+                  formControlName="status"
+                  aria-label="Select Status"
+                >
+                  <option
+                    *ngFor="let status of statusOptions"
+                    [ngValue]="status.value"
+                  >
+                    {{ status.name }}
+                  </option>
+                </select>
+                <div
+                  class="error-message"
+                  *ngIf="status.touched && status?.invalid"
+                >
+                  <span *ngIf="status?.errors?.['required']">
+                    status is required.
+                  </span>
+                </div>
+              </div>
+              <div class="submit-button">
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@ export class TaskService {
 
   createTask(taskParam: any): Observable<taskResponse> {
     return this.http
-      .post<taskResponse>('http://localhost:3000/createTask', taskParam)
+      .post<taskResponse>('http://localhost:3000/api/createTask', taskParam)
       .pipe(
         map((response) => {
           return response;
@@ -24,7 +24,7 @@ export class TaskService {
 
   updateTask(taskParam: any): Observable<taskResponse> {
     return this.http
-      .patch<taskResponse>('http://localhost:3000/updateTask', taskParam)
+      .patch<taskResponse>('http://localhost:3000/api/updateTask', taskParam)
       .pipe(
         map((response) => {
           return response;
@@ -35,7 +35,7 @@ export class TaskService {
 
   deleteTask(taskId: any) {
     this.http
-      .get('http://localhost:3000/deleteTask', taskId)
+      .get('http://localhost:3000/api/deleteTask', taskId)
       .subscribe((respData) => {
         return respData;
       });

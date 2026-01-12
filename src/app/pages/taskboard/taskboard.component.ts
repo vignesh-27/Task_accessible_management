@@ -13,10 +13,15 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 export class TaskboardComponent implements OnInit {
   public allTask: any = [];
   showForm: boolean = false;
-  formtype: any = '';
+  formType: any = '';
+  formValue: any;
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
+    this.getAllTask();
+  }
+
+  getAllTask() {
     this.taskService.getTask().subscribe({
       next: (data) => {
         this.allTask = data;
@@ -26,18 +31,30 @@ export class TaskboardComponent implements OnInit {
   }
 
   createForm() {
-    this.formtype = 'create';
+    this.formType = 'create';
     this.showForm = true;
   }
 
-  updateForm() {
-    this.formtype = 'update';
+  updateForm(value: any) {
+    this.formValue = value;
+    this.formType = 'update';
     this.showForm = true;
   }
 
   formUpdate(respData: any) {
-    const tempRow = this.allTask.push(respData);
-    this.allTask = tempRow;
-    this.showForm = false;
+    if (respData && Object.keys(respData).length) {
+      switch (this.formType) {
+        case 'update':
+          this.getAllTask();
+          break;
+        case 'create':
+          const objData = respData;
+          this.allTask = [...this.allTask, objData];
+          this.showForm = false;
+          break;
+      }
+    } else {
+      this.showForm = false;
+    }
   }
 }
