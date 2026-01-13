@@ -42,19 +42,7 @@ export class TaskboardComponent implements OnInit {
   }
 
   formUpdate(respData: any) {
-    if (respData && Object.keys(respData).length) {
-      switch (this.formType) {
-        case 'update':
-          this.getAllTask();
-          break;
-        case 'create':
-          const objData = respData;
-          this.allTask = [...this.allTask, objData];
-          this.showForm = false;
-          break;
-      }
-    } else {
-      this.showForm = false;
-    }
+    this.getAllTask();
+    this.showForm = false;
   }
 }

@@ -1,3 +1,5 @@
+<div class="dashboard-title">Jira Dashboard</div>
+
 <div *ngIf="showForm">
   <app-task-form
     [formType]="formType"
@@ -6,54 +8,87 @@
   ></app-task-form>
 </div>
 
-<div *ngIf="!showForm" class="task-dashboard">
+<div class="task-dashboard">
   <div class="task-pannel backlog">
     <div class="title panel-backlog">
-      <span
-        ><i class="icon-option bi bi-plus-square" (click)="createForm()"></i
+      <span title="Add task"
+        ><i
+          class="icon-option bi bi-plus-square"
+          tabindex="0"
+          (click)="createForm()"
+          (keyup.enter)="createForm()"
+        ></i
       ></span>
       Backlog
     </div>
+
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 1" class="backlog-board">
         <div class="task-title">
-          <i
-            class="icon-option bi bi-pencil-square"
-            (click)="updateForm(task)"
-          ></i>
+          <span title="Add task"
+            ><i
+              class="icon-option bi bi-pencil-square"
+              tabindex="0"
+              (click)="updateForm(task)"
+              (keyup.enter)="updateForm(task)"
+            ></i
+          ></span>
           {{ task.title }}
         </div>
-        <div class="task-desc">{{ task.description }}</div>
+
+        <div class="task-desc">
+          <span class="desc-icon"><i class="bi bi-snow2"></i></span
+          >{{ task.description }}
+        </div>
       </div>
     </div>
   </div>
+
   <div class="task-pannel inprogress">
     <div class="title panel-inprogress">In Progress</div>
+
     <div *ngFor="let task of allTask">
-      <div *ngIf="task.status == 2" class="backlog-board">
+      <div *ngIf="task.status == 2" class="backlog-inprogress">
         <div class="task-title">
-          <i
-            class="icon-option bi bi-pencil-square"
-            (click)="updateForm(task)"
-          ></i>
+          <span title="Add task"
+            ><i
+              class="icon-option bi bi-pencil-square"
+              tabindex="0"
+              (click)="updateForm(task)"
+              (keyup.enter)="updateForm(task)"
+            ></i
+          ></span>
           {{ task.title }}
         </div>
-        <div class="task-desc">{{ task.description }}</div>
+
+        <div class="task-desc">
+          <span class="desc-icon"><i class="bi bi-snow2"></i></span
+          >{{ task.description }}
+        </div>
       </div>
     </div>
   </div>
+
   <div class="task-pannel resolved">
     <div class="title panel-resolved">Resolved</div>
+
     <div *ngFor="let task of allTask">
-      <div *ngIf="task.status == 3" class="backlog-board">
+      <div *ngIf="task.status == 3" class="backlog-resolved">
         <div class="task-title">
-          <i
-            class="icon-option bi bi-pencil-square"
-            (click)="updateForm(task)"
-          ></i
+          <span title="Add task"
+            ><i
+              class="icon-option bi bi-pencil-square"
+              tabindex="0"
+              (keyup.enter)="updateForm(task)"
+              (click)="updateForm(task)"
+            ></i></span
           >{{ task.title }}
         </div>
-        <div class="task-desc">{{ task.description }}</div>
+
+        <div class="task-desc">
+          <span class="desc-icon"><i class="bi bi-snow2"></i></span
+          >{{ task.description }}
+        </div>
       </div>
     </div>
   </div>

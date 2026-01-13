@@ -33,12 +33,13 @@ export class TaskService {
       );
   }
 
-  deleteTask(taskId: any) {
-    this.http
-      .get('http://localhost:3000/api/deleteTask', taskId)
-      .subscribe((respData) => {
-        return respData;
-      });
+  deleteTask(taskId: any): Observable<any> {
+    return this.http.post('http://localhost:3000/api/deleteTask', taskId).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

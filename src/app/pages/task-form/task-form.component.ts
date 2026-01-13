@@ -30,6 +30,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   @Input() formType = '';
   @Input() formValue: any = '';
   @Output() formUpdate = new EventEmitter<string>();
+  dialogTitle: any = '';
   private modalInstance: Modal | undefined;
 
   TaskForm: any;
@@ -60,8 +61,29 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
     this.formInit();
     this.openModal();
-    if (this.formType == 'update') {
-      this.setFormValue();
+    this.dialogTitle;
+    switch (this.formType) {
+      case 'create':
+        this.dialogTitle = 'Backlog';
+        break;
+      case 'update':
+        this.setDialogTitle();
+        this.setFormValue();
+        break;
+    }
+  }
+
+  setDialogTitle() {
+    switch (this.formValue.status) {
+      case 1:
+        this.dialogTitle = 'Backlog';
+        break;
+      case 2:
+        this.dialogTitle = 'In Progress';
+        break;
+      case 3:
+        this.dialogTitle = 'Resolved';
+        break;
     }
   }
 
@@ -101,7 +123,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     return this.TaskForm.get('status');
   }
 
-  onSubmit() {
+  onSubmit(saveType: any) {
     if (this.TaskForm.valid) {
       switch (this.formType) {
         case 'create':
@@ -109,8 +131,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
           this.taskService.createTask(createData).subscribe({
             next: (data) => {
               this.formData = data;
-              this.modalInstance?.hide();
-              this.formUpdate.emit(this.formData);
+              this.emitFunction(saveType);
             },
             error: (err) => console.log('err :', err),
           });
@@ -118,12 +139,10 @@ export class TaskFormComponent implements OnInit, OnDestroy {
         case 'update':
           const updateData = this.TaskForm.value;
           updateData['_id'] = this.formValue._id;
-          console.log('update data :', updateData);
           this.taskService.updateTask(updateData).subscribe({
             next: (data) => {
               this.formData = data;
-              this.modalInstance?.hide();
-              this.formUpdate.emit(this.formData);
+              this.emitFunction(saveType);
             },
             error: (err) => console.log('err :', err),
           });
@@ -134,7 +153,34 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteTask() {
+    const deleteData = { _id: this.formValue._id };
+    this.taskService.deleteTask(deleteData).subscribe({
+      next: (data) => {
+        this.formData = '';
+        this.formUpdate.emit(this.formData);
+        this.resetForm();
+        this.modalInstance?.hide();
+      },
+      error: (err) => console.log('err :', err),
+    });
+  }
+
+  emitFunction(saveType: any) {
+    switch (saveType) {
+      case 1:
+        this.formUpdate.emit(this.formData);
+        this.modalInstance?.hide();
+        break;
+      case 2:
+        this.resetForm();
+        break;
+    }
+  }
+
   resetForm() {
+    this.formType = 'create';
+    this.formValue = {};
     this.TaskForm.reset();
   }
 
