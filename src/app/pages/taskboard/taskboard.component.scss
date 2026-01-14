@@ -78,13 +78,13 @@
 }
 
 .task-title {
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 600;
   font-family: "Bebas Neue", sans-serif;
 }
 
 .task-desc {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -92,7 +92,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #f1f8ff;
   cursor: pointer;
   margin-right: 7px;
   font-size: 20px;
@@ -107,6 +106,10 @@
 .desc-icon {
   font-size: 1rem;
   margin-right: 5px;
+}
+
+.edit-icon {
+  float: right;
 }
 
 @media (min-width: 768px) {

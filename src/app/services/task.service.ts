@@ -8,7 +8,12 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getTask(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/findTask');
+    return this.http.get('http://localhost:3000/api/findTask').pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   createTask(taskParam: any): Observable<taskResponse> {

@@ -17,6 +17,13 @@ import {
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { Modal } from 'bootstrap';
+import { Store } from '@ngrx/store';
+import * as TaskAction from '../../store/actions/task.action';
+import {
+  selectCreateTaskSuccess,
+  selectUpdateTaskSuccess,
+} from '../../store/selector/task.selector';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-form',
@@ -48,7 +55,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     { value: 3, name: 'Critical' },
   ];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private store: Store) {}
 
   ngOnInit(): void {
     this.modalInstance = new Modal(this.myFormModal.nativeElement);
@@ -127,25 +134,30 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     if (this.TaskForm.valid) {
       switch (this.formType) {
         case 'create':
-          const createData = this.TaskForm.value;
-          this.taskService.createTask(createData).subscribe({
-            next: (data) => {
-              this.formData = data;
+          const createTask = this.TaskForm.value;
+          this.store.dispatch(TaskAction.createTaskAction(createTask));
+
+          this.store
+            .select(selectCreateTaskSuccess)
+            .pipe(filter(Boolean), take(1))
+            .subscribe(() => {
+              this.formData = createTask;
               this.emitFunction(saveType);
-            },
-            error: (err) => console.log('err :', err),
-          });
+            });
           break;
         case 'update':
-          const updateData = this.TaskForm.value;
-          updateData['_id'] = this.formValue._id;
-          this.taskService.updateTask(updateData).subscribe({
-            next: (data) => {
-              this.formData = data;
+          const updateTask = this.TaskForm.value;
+          updateTask['_id'] = this.formValue._id;
+          this.store.dispatch(TaskAction.updateTaskAction({ updateTask }));
+
+          this.store
+            .select(selectUpdateTaskSuccess)
+            .pipe(filter(Boolean), take(1))
+            .subscribe(() => {
+              this.formData = updateTask;
               this.emitFunction(saveType);
-            },
-            error: (err) => console.log('err :', err),
-          });
+            });
+
           break;
       }
     } else {
@@ -157,6 +169,8 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     const deleteData = { _id: this.formValue._id };
     this.taskService.deleteTask(deleteData).subscribe({
       next: (data) => {
+        this.store.dispatch(TaskAction.getTaskAction({}));
+
         this.formData = '';
         this.formUpdate.emit(this.formData);
         this.resetForm();

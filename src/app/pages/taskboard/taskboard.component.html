@@ -25,7 +25,8 @@
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 1" class="backlog-board">
         <div class="task-title">
-          <span title="Add task"
+          {{ task.title }}
+          <span class="edit-icon" title="Edit task"
             ><i
               class="icon-option bi bi-pencil-square"
               tabindex="0"
@@ -33,7 +34,6 @@
               (keyup.enter)="updateForm(task)"
             ></i
           ></span>
-          {{ task.title }}
         </div>
 
         <div class="task-desc">
@@ -50,7 +50,8 @@
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 2" class="backlog-inprogress">
         <div class="task-title">
-          <span title="Add task"
+          {{ task.title }}
+          <span class="edit-icon" title="Edit task"
             ><i
               class="icon-option bi bi-pencil-square"
               tabindex="0"
@@ -58,7 +59,6 @@
               (keyup.enter)="updateForm(task)"
             ></i
           ></span>
-          {{ task.title }}
         </div>
 
         <div class="task-desc">
@@ -75,14 +75,15 @@
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 3" class="backlog-resolved">
         <div class="task-title">
-          <span title="Add task"
+          {{ task.title }}
+          <span class="edit-icon" title="Edit task"
             ><i
               class="icon-option bi bi-pencil-square"
               tabindex="0"
               (keyup.enter)="updateForm(task)"
               (click)="updateForm(task)"
-            ></i></span
-          >{{ task.title }}
+            ></i
+          ></span>
         </div>
 
         <div class="task-desc">

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavComponent } from '../nav/nav.component';
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { TaskFormComponent } from '../task-form/task-form.component';
+import { Store } from '@ngrx/store';
+import * as TaskAction from '../../store/actions/task.action';
+import { selectAllTasks } from '../../store/selector/task.selector';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-taskboard',
@@ -15,19 +18,19 @@ export class TaskboardComponent implements OnInit {
   showForm: boolean = false;
   formType: any = '';
   formValue: any;
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private store: Store) {}
 
   ngOnInit() {
     this.getAllTask();
   }
 
   getAllTask() {
-    this.taskService.getTask().subscribe({
-      next: (data) => {
-        this.allTask = data;
-      },
-      error: (err) => console.log('err :', err),
-    });
+    this.store
+      .select(selectAllTasks)
+      .pipe()
+      .subscribe((allTask) => {
+        this.allTask = allTask;
+      });
   }
 
   createForm() {
@@ -42,7 +45,6 @@ export class TaskboardComponent implements OnInit {
   }
 
   formUpdate(respData: any) {
-    this.getAllTask();
     this.showForm = false;
   }
 }
