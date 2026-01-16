@@ -2,13 +2,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { taskResponse } from '../interfaces/task';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   constructor(private http: HttpClient) {}
 
   getTask(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/findTask').pipe(
+    const url = `${environment.server_url}/findTask`;
+    return this.http.get(url).pipe(
       map((response) => {
         return response;
       }),
@@ -17,29 +19,28 @@ export class TaskService {
   }
 
   createTask(taskParam: any): Observable<taskResponse> {
-    return this.http
-      .post<taskResponse>('http://localhost:3000/api/createTask', taskParam)
-      .pipe(
-        map((response) => {
-          return response;
-        }),
-        catchError(this.handleError)
-      );
+    const url = `${environment.server_url}/createTask`;
+    return this.http.post<taskResponse>(url, taskParam).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   updateTask(taskParam: any): Observable<taskResponse> {
-    return this.http
-      .patch<taskResponse>('http://localhost:3000/api/updateTask', taskParam)
-      .pipe(
-        map((response) => {
-          return response;
-        }),
-        catchError(this.handleError)
-      );
+    const url = `${environment.server_url}/updateTask`;
+    return this.http.patch<taskResponse>(url, taskParam).pipe(
+      map((response) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   deleteTask(taskId: any): Observable<any> {
-    return this.http.post('http://localhost:3000/api/deleteTask', taskId).pipe(
+    const url = `${environment.server_url}/deleteTask`;
+    return this.http.post(url, taskId).pipe(
       map((response) => {
         return response;
       }),
