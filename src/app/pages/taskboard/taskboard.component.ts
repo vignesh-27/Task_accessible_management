@@ -18,6 +18,11 @@ export class TaskboardComponent implements OnInit {
   showForm: boolean = false;
   formType: any = '';
   formValue: any;
+  priority: any = {
+    1: 'Medium',
+    2: 'High',
+    3: 'Critical',
+  };
   constructor(private taskService: TaskService, private store: Store) {}
 
   ngOnInit() {

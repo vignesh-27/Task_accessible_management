@@ -85,7 +85,7 @@
 
 .task-desc {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .icon-option {
@@ -94,7 +94,7 @@
   justify-content: center;
   cursor: pointer;
   margin-right: 7px;
-  font-size: 20px;
+  font-size: 1.1rem;
   border-radius: 15%;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
@@ -108,8 +108,8 @@
   margin-right: 5px;
 }
 
-.edit-icon {
-  float: right;
+.task-priority {
+  font-weight: 600;
 }
 
 @media (min-width: 768px) {
