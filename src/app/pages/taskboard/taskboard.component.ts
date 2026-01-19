@@ -6,10 +6,11 @@ import { Store } from '@ngrx/store';
 import * as TaskAction from '../../store/actions/task.action';
 import { selectAllTasks } from '../../store/selector/task.selector';
 import { take } from 'rxjs/operators';
+import { TaskContentComponent } from '../task-content/task-content.component';
 
 @Component({
   selector: 'app-taskboard',
-  imports: [CommonModule, TaskFormComponent],
+  imports: [CommonModule, TaskFormComponent, TaskContentComponent],
   templateUrl: './taskboard.component.html',
   styleUrl: './taskboard.component.scss',
 })
@@ -47,6 +48,10 @@ export class TaskboardComponent implements OnInit {
     this.formValue = value;
     this.formType = 'update';
     this.showForm = true;
+  }
+
+  editUpdate(taskObj: any) {
+    this.updateForm(taskObj);
   }
 
   formUpdate(respData: any) {

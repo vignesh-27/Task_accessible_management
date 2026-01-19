@@ -24,29 +24,10 @@
 
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 1" class="backlog-board">
-        <div class="task-title">
-          <span title="Edit task"
-            ><i
-              class="icon-option bi bi-pencil-square"
-              tabindex="0"
-              (click)="updateForm(task)"
-              (keyup.enter)="updateForm(task)"
-            ></i
-          ></span>
-          <span>{{ task.title }}</span>
-        </div>
-
-        <div class="task-desc">
-          <span class="desc-icon"><i class="bi bi-snow2"></i></span
-          >{{ task.description }}
-        </div>
-        <div class="task-priority">
-          <i class="desc-icon bi bi-info-square"></i
-          >{{ priority[task.priority] }}
-        </div>
-        <div class="task-priority">
-          {{ task?.updatedAt | date : "short" }}
-        </div>
+        <app-task-content
+          [taskObj]="task"
+          (formUpdate)="editUpdate($event)"
+        ></app-task-content>
       </div>
     </div>
   </div>
@@ -56,29 +37,10 @@
 
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 2" class="backlog-inprogress">
-        <div class="task-title">
-          <span title="Edit task"
-            ><i
-              class="icon-option bi bi-pencil-square"
-              tabindex="0"
-              (click)="updateForm(task)"
-              (keyup.enter)="updateForm(task)"
-            ></i
-          ></span>
-          {{ task.title }}
-        </div>
-
-        <div class="task-desc">
-          <span class="desc-icon"><i class="bi bi-snow2"></i></span
-          >{{ task.description }}
-        </div>
-        <div class="task-priority">
-          <i class="desc-icon bi bi-info-square"></i
-          >{{ priority[task.priority] }}
-        </div>
-        <div class="task-priority">
-          {{ task?.updatedAt | date : "short" }}
-        </div>
+        <app-task-content
+          [taskObj]="task"
+          (formUpdate)="editUpdate($event)"
+        ></app-task-content>
       </div>
     </div>
   </div>
@@ -88,29 +50,10 @@
 
     <div *ngFor="let task of allTask">
       <div *ngIf="task.status == 3" class="backlog-resolved">
-        <div class="task-title">
-          <span title="Edit task"
-            ><i
-              class="icon-option bi bi-pencil-square"
-              tabindex="0"
-              (keyup.enter)="updateForm(task)"
-              (click)="updateForm(task)"
-            ></i
-          ></span>
-          {{ task.title }}
-        </div>
-
-        <div class="task-desc">
-          <span class="desc-icon"><i class="bi bi-snow2"></i></span
-          >{{ task.description }}
-        </div>
-        <div class="task-priority">
-          <i class="desc-icon bi bi-info-square"></i>
-          {{ priority[task.priority] }}
-        </div>
-        <div class="task-priority">
-          {{ task?.updatedAt | date : "short" }}
-        </div>
+        <app-task-content
+          [taskObj]="task"
+          (formUpdate)="editUpdate($event)"
+        ></app-task-content>
       </div>
     </div>
   </div>

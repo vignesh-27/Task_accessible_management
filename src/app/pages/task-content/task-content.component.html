@@ -1,0 +1,23 @@
+<div class="task-title">
+  <span title="Edit task"
+    ><i
+      class="icon-option bi bi-pencil-square"
+      tabindex="0"
+      (keyup.enter)="updateForm(taskObj)"
+      (click)="updateForm(taskObj)"
+    ></i
+  ></span>
+  {{ taskObj.title }}
+</div>
+
+<div class="task-desc">
+  <span class="desc-icon"><i class="bi bi-snow2"></i></span
+  >{{ taskObj.description }}
+</div>
+<div class="task-priority">
+  <i class="desc-icon bi bi-info-square"></i>
+  {{ priority[taskObj.priority] }}
+</div>
+<div class="task-priority">
+  {{ taskObj?.updatedAt | date : "short" }}
+</div>

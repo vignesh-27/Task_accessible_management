@@ -1,0 +1,55 @@
+.backlog-board {
+  background-color: #69d8fb;
+}
+
+.backlog-inprogress {
+  background-color: #fb8c4b;
+}
+
+.backlog-resolved {
+  background-color: #26cd7f;
+}
+
+.backlog-board,
+.backlog-inprogress,
+.backlog-resolved {
+  margin: 7px 10px 10px 8px;
+  padding: 10px 15px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 4px #c3c3c3;
+}
+
+.task-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.task-desc {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.icon-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 7px;
+  font-size: 1.1rem;
+  border-radius: 15%;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.icon-option:active {
+  transform: scale(0.95);
+}
+
+.desc-icon {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.task-priority {
+  font-weight: 600;
+}
